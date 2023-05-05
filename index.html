@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>База знаний</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/choices.min.css" />
+    <script
+      src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"
+      type="text/javascript"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.css"
+      integrity="sha512-uZTwaYYhJLFXaXYm1jdNiH6JZ1wLCTVnarJza7iZ1OKQmvi6prtk85NMvicoSobylP5K4FCdGEc4vk1AYT8b9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="holst">
+      <ul class="holst__list">
+        <li class="holst__item item-checkbox">
+          <h2 class="checkbox-title">Категории:</h2>
+          <ul class="checkbox-list">
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Динозавры<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Медведи<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Косули<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Лисы<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Волки<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+            <li class="checkbox-item">
+              <label class="checkbox-label"
+                ><input class="checkbox" type="checkbox" />Олени и лоси<span
+                  class="custom-checkbox"
+                ></span
+              ></label>
+            </li>
+          </ul>
+        </li>
+
+        <li class="holst__item item-select">
+          <select name="select" id="selectCustom">
+            <option>Материал</option>
+            <option value="1">Древесина</option>
+            <option value="2">Металл</option>
+            <option value="3">Камень</option>
+            <option value="4">Пластик</option>
+            <option value="5">Композитный</option>
+            <option value="6">Гипс</option>
+          </select>
+        </li>
+
+        <li class="holst__item item-map">
+          <div id="map" style="width: 460px; height: 460px"></div>
+        </li>
+
+        <li class="holst__item item-customScroll">
+          <div class="customScroll" data-simplebar>
+            Сложно сказать, почему многие известные личности представлены в
+            исключительно положительном свете. Лишь активно развивающиеся страны
+            третьего мира будут объективно рассмотрены соответствующими
+            инстанциями. Мы вынуждены отталкиваться от того, что
+            высокотехнологичная концепция общественного уклада представляет
+            собой интересный эксперимент проверки глубокомысленных рассуждений.
+            Имеется спорная точка зрения, гласящая примерно следующее:
+            непосредственные участники технического прогресса освещают
+            чрезвычайно интересные особенности картины в целом, однако
+            конкретные выводы, разумеется, обнародованы. Значимость этих проблем
+            настолько очевидна, что социально-экономическое развитие, а также
+            свежий взгляд на привычные вещи - безусловно открывает новые
+            горизонты для первоочередных требований.
+          </div>
+        </li>
+
+        <li class="holst__item item-form">
+          <form action="" class="form">
+            <div class="input-box">
+              <input
+                class="form-input"
+                name="Имя"
+                type="text"
+                placeholder="Имя*"
+                data-validate-field="name"
+              />
+            </div>
+            <div class="input-box">
+              <input
+                class="form-input"
+                name="tel"
+                type="tel"
+                placeholder="Телефон*"
+                data-validate-field="tel"
+                data-validate-rules="phone"
+              />
+            </div>
+            <div class="input-box">
+              <input
+                class="form-input"
+                name="email"
+                type="email"
+                placeholder="E-mail*"
+                data-validate-field="mail"
+              />
+            </div>
+            <button type="submit" class="form-btn">Заказать</button>
+          </form>
+        </li>
+
+        <li class="holst__item item-tooltip">
+          <p>
+            Следует отметить, что <br />
+            социально-экономическое развитие способствует повышению качества
+            переосмысления<br />
+            внешнеэкономических политик.
+            <span class="tooltip-container tooltip-2">
+              <span class="tooltip">i</span>
+            </span>
+          </p>
+        </li>
+
+        <li class="holst__item"></li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      // Функция ymaps.ready() будет вызвана, когда
+      // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+      ymaps.ready(init);
+      function init() {
+        // Создание карты.
+        var myMap = new ymaps.Map("map", {
+          // Координаты центра карты.
+          // Порядок по умолчанию: «широта, долгота».
+          // Чтобы не определять координаты центра карты вручную,
+          // воспользуйтесь инструментом Определение координат.
+          center: [48.87216649563676, 2.3541716969241957],
+          // Уровень масштабирования. Допустимые значения:
+          // от 0 (весь мир) до 19.
+          zoom: 15,
+        });
+
+        // Удалим с карты «Ползунок масштаба».
+        myMap.controls.remove("zoomControl");
+        myMap.controls.remove("routeButtonControl");
+        myMap.controls.remove("trafficControl");
+        myMap.controls.remove("typeSelector");
+        myMap.controls.remove("fullscreenControl");
+        myMap.controls.remove("rulerControl");
+        myMap.controls.remove("geolocationControl");
+        myMap.controls.remove("searchControl");
+
+        // // Создание геообъекта с типом точка (метка).
+        // var myGeoObject = new ymaps.GeoObject({
+        //   geometry: {
+        //     type: "Point", // тип геометрии - точка
+        //     coordinates: [48.87216649563676, 2.3541716969241957], // координаты точки
+        //   },
+        // });
+
+        var myPlacemark = new ymaps.Placemark(
+          [48.87216649563676, 2.3541716969241957],
+          {},
+          {
+            iconLayout: "default#image",
+            iconImageHref: "Point.svg",
+            iconImageSize: [28, 40],
+            iconImageOffset: [-3, -42],
+          }
+        );
+
+        // Размещение геообъекта на карте.
+        myMap.geoObjects.add(myPlacemark);
+      }
+    </script>
+
+    <script src="js/choices.min.js"></script>
+    <script>
+      const element = document.querySelector("select");
+      const choices = new Choices(element, { searchEnabled: false });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.js"
+      integrity="sha512-rn0CaCtyheymRT43p0ZuFH0SvNriLU5cuJpY2f4IcyLrbHzJdsIF1dygi9oNha1BhHagO8U+h2xRWCosYf9gCg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://rawcdn.githack.com/horprogs/Just-validate/7661936417e8aaad0e059291890c68a6bf473f6b/dist/js/just-validate.min.js"></script>
+    <script src="https://rawcdn.githack.com/RobinHerbots/Inputmask/a95afe64e7467eb14eb8aa8ccbfb6340a46fb8e3/dist/inputmask.min.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>
